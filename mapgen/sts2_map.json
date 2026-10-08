@@ -1,0 +1,123 @@
+{
+  "_note": "node_types 里的每个条目描述一种地图节点。count 是这一节点在每张图上的固定个数；roll 用高斯抽样决定个数，用于还原原作里数量随机的那几类节点；weight 是权重，给出权重的节点会按权重瓜分前面没有分完的空位。三者都不写的节点只由 fixed_rows 或 default_type 决定。",
+  "version": 1,
+  "seed": 0,
+  "map": {
+    "columns": 7,
+    "rooms": 15,
+    "path_count": 7,
+    "post_process": true,
+    "prune": true,
+    "prune_iterations": 3,
+    "prune_loop_limit": 50,
+    "assignment_passes": 3
+  },
+  "rules": {
+    "lower_row_threshold": 6,
+    "lower_restricted_types": [
+      "RestSite",
+      "Elite"
+    ],
+    "upper_row_offset": 3,
+    "upper_restricted_types": [
+      "RestSite"
+    ],
+    "no_adjacent_repeat_types": [
+      "Elite",
+      "RestSite",
+      "Treasure",
+      "Shop"
+    ],
+    "no_sibling_types": [
+      "RestSite",
+      "Monster",
+      "Unknown",
+      "Elite",
+      "Shop"
+    ],
+    "ignore_rules_types": []
+  },
+  "fixed_rows": [
+    {
+      "from": "start",
+      "row": 0,
+      "type": "Ancient"
+    },
+    {
+      "from": "start",
+      "row": 1,
+      "type": "Monster"
+    },
+    {
+      "from": "end",
+      "offset": 7,
+      "type": "Treasure"
+    },
+    {
+      "from": "end",
+      "offset": 1,
+      "type": "RestSite"
+    }
+  ],
+  "start_type": "Ancient",
+  "end_type": "Boss",
+  "default_type": "Monster",
+  "node_types": [
+    {
+      "id": "Ancient",
+      "label": "远古",
+      "color": "#c9a227"
+    },
+    {
+      "id": "Boss",
+      "label": "首领",
+      "color": "#8b2b2b"
+    },
+    {
+      "id": "Monster",
+      "label": "怪物",
+      "color": "#5b6b73"
+    },
+    {
+      "id": "Elite",
+      "label": "精英",
+      "color": "#a0453f",
+      "count": 5
+    },
+    {
+      "id": "RestSite",
+      "label": "休息",
+      "color": "#3f8f6a",
+      "roll": {
+        "kind": "gaussian_int",
+        "mean": 7,
+        "stddev": 1,
+        "min": 6,
+        "max": 7
+      }
+    },
+    {
+      "id": "Shop",
+      "label": "商店",
+      "color": "#c98b2e",
+      "count": 3
+    },
+    {
+      "id": "Treasure",
+      "label": "宝箱",
+      "color": "#c9b02e"
+    },
+    {
+      "id": "Unknown",
+      "label": "未知",
+      "color": "#7d8fa8",
+      "roll": {
+        "kind": "gaussian_int",
+        "mean": 12,
+        "stddev": 1,
+        "min": 10,
+        "max": 14
+      }
+    }
+  ]
+}
